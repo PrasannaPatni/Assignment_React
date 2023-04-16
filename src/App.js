@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
-
+import { useState } from "react";
 function App() {
+  const [myArray, setMyArray] = useState([]);
+
+  const handleInput = (event) => {
+    const value = event.target.value;
+    // Split the input on commas to create an array of strings
+    const newArray = value.split(",");
+    setMyArray(newArray);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label htmlFor="my-input">Enter a comma-separated list of strings:</label>
+      <input id="my-input" onChange={handleInput} />
+      <ul>
+        {myArray.map((string, index) => (
+          <li key={index}>{string}</li>
+        ))}
+      </ul>
     </div>
   );
 }
